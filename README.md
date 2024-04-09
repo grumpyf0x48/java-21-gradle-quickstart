@@ -1,7 +1,7 @@
 # java-21-gradle-quickstart
 
-[![Build](https://github.com/grumpyf0x48/java-21-gradle-quickstart/actions/workflows/build.yml/badge.svg)](https://github.com/grumpyf0x48/java-gradle-quickstart/actions/workflows/build.yml)
-[![Native Build](https://github.com/grumpyf0x48/java-gradle-quickstart/actions/workflows/native_build.yml/badge.svg)](https://github.com/grumpyf0x48/java-21-gradle-quickstart/actions/workflows/native_build.yml)
+[![Build](https://github.com/grumpyf0x48/java-21-gradle-quickstart/actions/workflows/build.yml/badge.svg)](https://github.com/grumpyf0x48/java-21-gradle-quickstart/actions/workflows/build.yml)
+[![Native Build](https://github.com/grumpyf0x48/java-21-gradle-quickstart/actions/workflows/native_build.yml/badge.svg)](https://github.com/grumpyf0x48/java-21-gradle-quickstart/actions/workflows/native_build.yml)
 
 **java-21-gradle-quickstart** is a template repository to bootstrap a new Java application using:
 
