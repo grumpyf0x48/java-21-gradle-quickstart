@@ -1,0 +1,39 @@
+name: Build with Gradle
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  JAVA_VERSION: '17'
+  JAVA_DISTRIBUTION: 'temurin'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and test application
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+      - name: Build and Test
+        uses: gradle/gradle-build-action@v3.2.1
+        with:
+          arguments: test distZip installDist
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle_quickstart_${{ github.sha }}
+          path: build/install/gradle_quickstart

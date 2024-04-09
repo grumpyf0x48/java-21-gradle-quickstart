@@ -1,0 +1,38 @@
+name: Native build with Gradle
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  GRAALVM_JAVA_VERSION: '17'
+  GRAALVM_DISTRIBUTION: 'graalvm'
+
+permissions:
+  contents: read
+
+jobs:
+  build_native:
+    name: Build and test native application
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: ${{ env.GRAALVM_JAVA_VERSION }}
+          distribution: ${{ env.GRAALVM_DISTRIBUTION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Test
+        uses: gradle/gradle-build-action@v3.2.1
+        with:
+          arguments: nativeTest nativeDistZip installNativeDist
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle_quickstart_native_${{ github.sha }}
+          path: build/install/gradle_quickstart-native
