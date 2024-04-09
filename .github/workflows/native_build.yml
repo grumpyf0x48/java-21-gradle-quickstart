@@ -3,9 +3,11 @@ name: Native build with Gradle
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 env:
-  GRAALVM_JAVA_VERSION: '17'
+  GRAALVM_JAVA_VERSION: '21'
   GRAALVM_DISTRIBUTION: 'graalvm'
 
 permissions:
