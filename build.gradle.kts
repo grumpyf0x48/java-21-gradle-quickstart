@@ -25,7 +25,7 @@ java {
 distributions {
     create("native") {
         contents {
-            from("${project.buildDir}/native/nativeCompile") {
+            from("${layout.buildDirectory}/native/nativeCompile") {
                 include("${rootProject.name}")
                 into("bin")
             }
