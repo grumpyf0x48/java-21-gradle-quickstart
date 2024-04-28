@@ -30,7 +30,7 @@ jobs:
       - name: Build and Test
         uses: gradle/gradle-build-action@v3.3.2
         with:
-          arguments: test distZip installDist
+          arguments: --scan test distZip installDist
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
