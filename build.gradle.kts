@@ -19,7 +19,7 @@ application {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(javaVersion))
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
