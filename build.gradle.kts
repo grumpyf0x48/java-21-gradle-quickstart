@@ -18,15 +18,15 @@ application {
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion("${javaVersion}")
-    targetCompatibility = JavaVersion.toVersion("${javaVersion}")
+    sourceCompatibility = JavaVersion.toVersion(javaVersion)
+    targetCompatibility = JavaVersion.toVersion(javaVersion)
 }
 
 distributions {
     create("native") {
         contents {
-            from("${layout.buildDirectory}/native/nativeCompile") {
-                include("${rootProject.name}")
+            from(layout.buildDirectory.dir("native/nativeCompile").get()) {
+                include(rootProject.name)
                 into("bin")
             }
         }
@@ -35,14 +35,20 @@ distributions {
 
 tasks.getByName("nativeDistZip") {
     dependsOn(tasks.nativeCompile)
-}
-
-tasks.getByName("nativeDistTar") {
-    dependsOn(tasks.nativeCompile)
+    description = "Bundles the project as a native distribution."
 }
 
 tasks.getByName("installNativeDist") {
     dependsOn(tasks.nativeCompile)
+    description = "Installs the project as a native distribution as-is."
+}
+
+tasks.getByName("distTar") {
+    group = null
+}
+
+tasks.getByName("nativeDistTar") {
+    group = null
 }
 
 graalvmNative {
