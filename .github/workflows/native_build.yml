@@ -26,10 +26,11 @@ jobs:
           distribution: ${{ env.GRAALVM_DISTRIBUTION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
       - name: Build and Test
-        uses: gradle/gradle-build-action@v3.3.2
-        with:
-          arguments: nativeTest nativeDistZip installNativeDist
+        run: ./gradlew nativeTest nativeDistZip installNativeDist
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
