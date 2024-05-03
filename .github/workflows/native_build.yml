@@ -3,6 +3,8 @@ name: Native build with Gradle
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 env:
   GRAALVM_JAVA_VERSION: '21'
@@ -27,7 +29,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and Test
-        uses: gradle/gradle-build-action@v3.3.2
+        uses: gradle/actions/setup-gradle@v3
         with:
           arguments: nativeTest nativeDistZip installNativeDist
 
