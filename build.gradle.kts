@@ -4,11 +4,14 @@ plugins {
     id("org.graalvm.buildtools.native")
 }
 
-val version: String by project
 val javaVersion: String by project
 
 val junitVersion: String by project
 
+//
+// Maintenant, pour compiler en natif
+// JUnit exige de moi que j'initialise au build 17 classes (dont 16 internes à son implémentation)
+// 👎
 val initializeAtBuildTime = listOf(
     "org.junit.jupiter.api.DisplayNameGenerator\$IndicativeSentences",
     "org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor\$ClassInfo",
@@ -26,7 +29,7 @@ val initializeAtBuildTime = listOf(
     "org.junit.platform.launcher.core.LauncherPhase",
     "org.junit.platform.suite.engine.DiscoverySelectorResolver",
     "org.junit.platform.suite.engine.SuiteTestDescriptor\$DiscoveryIssueForwardingListener",
-    "org.junit.platform.suite.engine.SuiteTestDescriptor\$LifecycleMethods",
+    "org.junit.platform.suite.engine.SuiteTestDescriptor\$LifecycleMethods"
 )
 
 dependencies {
