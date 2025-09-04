@@ -7,33 +7,11 @@ plugins {
 val javaVersion: String by project
 
 val junitVersion: String by project
-
-//
-// Maintenant, pour compiler en natif
-// JUnit exige de moi que j'initialise au build 17 classes (dont 16 internes à son implémentation)
-// 👎
-val initializeAtBuildTime = listOf(
-    "org.junit.jupiter.api.DisplayNameGenerator\$IndicativeSentences",
-    "org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor\$ClassInfo",
-    "org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor\$LifecycleMethods",
-    "org.junit.jupiter.engine.descriptor.ClassTemplateInvocationTestDescriptor",
-    "org.junit.jupiter.engine.descriptor.ClassTemplateTestDescriptor",
-    "org.junit.jupiter.engine.descriptor.DynamicDescendantFilter\$Mode",
-    "org.junit.jupiter.engine.descriptor.ExclusiveResourceCollector\$1",
-    "org.junit.jupiter.engine.descriptor.MethodBasedTestDescriptor\$MethodInfo",
-    "org.junit.jupiter.engine.discovery.ClassSelectorResolver\$DummyClassTemplateInvocationContext",
-    "org.junit.platform.engine.support.store.NamespacedHierarchicalStore\$EvaluatedValue",
-    "org.junit.platform.launcher.core.DiscoveryIssueNotifier",
-    "org.junit.platform.launcher.core.HierarchicalOutputDirectoryProvider",
-    "org.junit.platform.launcher.core.LauncherDiscoveryResult\$EngineResultInfo",
-    "org.junit.platform.launcher.core.LauncherPhase",
-    "org.junit.platform.suite.engine.DiscoverySelectorResolver",
-    "org.junit.platform.suite.engine.SuiteTestDescriptor\$DiscoveryIssueForwardingListener",
-    "org.junit.platform.suite.engine.SuiteTestDescriptor\$LifecycleMethods"
-)
+val junitPlatformLauncherVersion: String by project
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:${junitPlatformLauncherVersion}")
 }
 
 application {
@@ -79,7 +57,6 @@ graalvmNative {
     toolchainDetection.set(false)
     binaries {
         all {
-            buildArgs.add("--initialize-at-build-time=${initializeAtBuildTime.joinToString(",")}")
             resources.autodetect()
         }
     }
