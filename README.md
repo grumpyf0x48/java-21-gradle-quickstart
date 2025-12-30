@@ -14,6 +14,10 @@
 - GitHub workflow to build, test, package the application and upload its distributions
 - Renovate for dependencies update
 
+## ⚠ Repository is archived
+
+_Warning:_ This repository is now archived and will no longer be updated.
+
 ## Rename the application
 
 By default, this template creates an application named `gradle_quickstart` in the package `org.grumpyf0x48`.
